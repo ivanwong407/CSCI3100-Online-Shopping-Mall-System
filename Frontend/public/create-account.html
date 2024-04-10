@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CU@ReShop - Create Account</title>
+    <link rel="icon" href="logo192.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+        name="description"
+        content="Create a new account at CU@ReShop"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .account-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .account-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .account-form input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .account-form button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .account-form button:hover {
+            background-color: #0056b3;
+        }
+        .navigation-links {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .navigation-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .navigation-links a:hover {
+            text-decoration: underline;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+        <div class="account-container">
+            <img src="%PUBLIC_URL%/logo192.png" alt="CU@ReShop Logo" class="logo"/>
+            <h2>Create Account</h2>
+            <form class="account-form">
+                <!-- <input type="text" id="fullname" placeholder="Full Name" required /> -->
+                <input type="email" id="email" placeholder="Email" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <input type="password" id="confirm-password" placeholder="Confirm Password" required />
+                <button type="submit">Create Account</button>
+            </form>
+            <div class="navigation-links">
+                <a href="index.html">Back to Main Page</a>
+                <a href="login.html">Back to Login</a>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript files would be included here -->
+</body>
+</html>
