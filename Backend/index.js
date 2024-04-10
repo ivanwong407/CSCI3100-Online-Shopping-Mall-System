@@ -8,7 +8,7 @@ const cors = require('cors');
 const app = express(); // Move this line before using `app`
 app.use(cors()); // Now `app` is defined and you can use it
 
-const PORT = process.env.PORT || 5000;
+
 
 // Connect to database
 connectDB();
@@ -18,9 +18,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use('/api/user', require('./routes/user_routes.js'))
+app.use('/api/users', require('./routes/user_routes.js'))
 
 // Error handling middleware
 app.use(errorHandler);
 
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
