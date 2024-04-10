@@ -1,28 +1,37 @@
-require('dotenv').config();
 const express = require('express');
-const connectDB = require('./config/db'); // Assuming you have a file for DB connection
-const userRoutes = require('./routes/user_routes'); // Your user routes file
-const { errorHandler } = require('./middleware/error_middleware'); // An error handling middleware
 const cors = require('cors');
+const {connectDB} = require('./utils/db');
+const dotenv = require('dotenv')
 
-const app = express(); // Move this line before using `app`
-app.use(cors()); // Now `app` is defined and you can use it
+const { get_logger } = require('./utils/logger.js')
+const { errorHandler } = require('./middleware/error_middleware')
 
+// Get Logger
+const logger = get_logger()
 
+// ENV Variables
+dotenv.config({ path: './config.env' })
 
-// Connect to database
+// Connect MongoDB
 connectDB();
 
-// Middleware for parsing JSON and urlencoded data
+// Run server
+const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
-app.use('/api/users', require('./routes/user_routes.js'))
-
-// Error handling middleware
-app.use(errorHandler);
+app.use('/api/user', require('./routes/user_routes.js'))
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+app.use(errorHandler)
+
+//app.use('/*', require('./routes/unused_routes'))
+
+const PORT = process.env.PORT || 3000
+
+app.listen(PORT, () => {
+    logger.info(`Listening on port ${PORT}`)
+})

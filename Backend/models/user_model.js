@@ -1,52 +1,31 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require('mongoose')
 
-// Define user schema fields
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true
+const userSchema = mongoose.Schema(
+  {
+    email: {
+      type: String,
+      required: [true, 'Add email'],
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, 'Add password'],
+    },
+    isAdmin: {
+      type: Boolean,
+      required: true
+    },
+    favVenues: {
+      type: [String]
+    },
+    isVerified: {
+      type: Boolean,
+      required: true
+    }
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true
-  },
-  password: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
+  {
+    timestamps: true,
   }
-});
+)
 
-// Pre-save hook to hash password
-userSchema.pre('save', async function (next) {
-  // If the password field has not been modified (e.g. when updating the user without changing the password), do not re-hash it
-  if (!this.isModified('password')) return next();
-
-  try {
-    // Generate a salt
-    const salt = await bcrypt.genSalt(10);
-    // Hash the password using the salt
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Compile model from schema
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
+module.exports = mongoose.model('User', userSchema)
