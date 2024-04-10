@@ -19,11 +19,16 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Incorrect username or password" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id, userType: user.userType }, process.env.JWT_SECRET, { expiresIn: '1h' });//added user.type
     res.status(200).json({ message: "User logged in successfully", token });
   } catch (error) {
     res.status(500).json({ message: "Login error", error: error.message });
   }
 };
 
-module.exports = { register, login };
+const getMe = async (req, res) => {
+  res.status(200).json(req.user);
+};
+
+
+module.exports = { register, login, getMe };

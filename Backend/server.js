@@ -8,7 +8,6 @@ dbConnect();
 const app = express();
 
 app.use(express.json());
-
 app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 5000;
