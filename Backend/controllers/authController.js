@@ -30,5 +30,14 @@ const getMe = async (req, res) => {
   res.status(200).json(req.user);
 };
 
+const listAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.json(users);
+  } catch (error) {
+    res.status(500).send({ message: 'Error retrieving users', error: error });
+  }
+};
 
-module.exports = { register, login, getMe };
+
+module.exports = { register, login, getMe, listAllUsers };

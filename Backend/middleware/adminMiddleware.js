@@ -16,4 +16,7 @@ const adminOnly = (req, res, next) => {
   }
 };
 
-module.exports = adminOnly;
+
+
+
+module.exports ={adminOnly};
