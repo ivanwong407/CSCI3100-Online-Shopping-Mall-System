@@ -7,7 +7,7 @@ const { protect } = require('../middleware/authMiddleware');
 
 // POST product at /postProduct - protected route
 router.post('/postProduct', protect, createProduct);
-router.post('/:id', getProductById);
+router.get('/details/:productID', getProductById);
 router.get('/', listAllProducts);
 
 

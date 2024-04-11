@@ -12,4 +12,5 @@ router.post('/login', login);
 router.get('/me', protect, getMe); // New protected route
 router.get('/', adminOnly, listAllUsers);
 
+
 module.exports = router;

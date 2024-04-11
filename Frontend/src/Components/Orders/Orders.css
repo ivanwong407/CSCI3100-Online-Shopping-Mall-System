@@ -1,0 +1,42 @@
+.orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .orders-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .orders-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .orders-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .orders-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .orders-table tr:hover {
+    background-color: #e6e6e6;
+  }
+  
+  .orders-table td:first-child {
+    text-align: center;
+  }
+  
+  .orders-table td:last-child {
+    text-transform: capitalize;
+  }

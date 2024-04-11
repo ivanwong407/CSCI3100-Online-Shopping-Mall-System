@@ -32,24 +32,37 @@ const createProduct = async (req, res) => {
 
 // GET a single product by ID
 const getProductById = async (req, res) => {
-    try {
-      // The product_id is read from the URL and used to find the product
-      const product = await Product.findById(req.params.id);
-  
-      if (!product) {
+  const productID = req.params.id; // Assuming the product ID is passed as a route parameter
+
+  try {
+    // Find the product by ID
+    const product = await Product.findById(productID);
+
+    if (product) {
+      // If the product is found, return it
+      return res.json(product);
+    } else {
+      // If the product is not found, search the product list
+      const productList = await Product.find({});
+
+      const matchedProduct = productList.find(
+        (p) => p.name.toLowerCase().includes(productID.toLowerCase()) || // Search by name
+          p.description.toLowerCase().includes(productID.toLowerCase()) || // Search by description
+          p.category.toLowerCase().includes(productID.toLowerCase()) // Search by category
+      );
+
+      if (matchedProduct) {
+        // If a matching product is found in the list, return it
+        return res.json(matchedProduct);
+      } else {
+        // If no matching product is found, return null
         return res.status(404).json({ message: 'Product not found' });
       }
-
-      res.json(product);
-    } catch (error) {
-      // If the product_id format is not valid ObjectId format, return a 400 error
-      if (error.kind === 'ObjectId') {
-        return res.status(400).json({ message: 'Invalid product ID' });
-      }
-      res.status(500).json({ message: 'Server error', error: error.message });
     }
-  };
-
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
 
   const listAllProducts = async (req, res) => {
     try {

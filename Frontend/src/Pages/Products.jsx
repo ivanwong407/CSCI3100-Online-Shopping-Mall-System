@@ -1,17 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import { useParams } from "react-router-dom";
-import List from "../Components/List/List";
-import useFetch from "../useFetch";
-import '../Pages/CSS/Products.css';
-import campus_photo from '../Components/Assets/campus.jpg'
-import data_product from "../Components/Assets/all_product";
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import useFetch from '../useFetch';
+import './CSS/Products.css';
+import campus_photo from '../Components/Assets/campus.jpg';
+import data_product from '../Components/Assets/all_product';
+import ProductList from '../Components/ProductList/ProductList';
 
 const Products = () => {
   const catId = parseInt(useParams().id);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sort, setSort] = useState(null);
   const [selectedSubCats, setSelectedSubCats] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [showResults, setShowResults] = useState(false);
 
   const { data, loading, error } = useFetch(
     `/sub-categories?[filters][categories][id][$eq]=${catId}`
@@ -21,25 +22,40 @@ const Products = () => {
     const value = e.target.value;
     const isChecked = e.target.checked;
 
-    setSelectedSubCats(
+    setSelectedSubCats((prevSelectedSubCats) =>
       isChecked
-        ? [...selectedSubCats, value]
-        : selectedSubCats.filter((item) => item !== value)
+        ? [...prevSelectedSubCats, value]
+        : prevSelectedSubCats.filter((item) => item !== value)
     );
   };
+
+  const handleSearch = () => {
+    setShowResults(true);
+  };
+
+  const handleReset = () => {
+    setShowResults(false);
+    setSearchInput('');
+  };
+
+  const filteredProducts = data_product.filter(
+    (item) =>
+      item.id.toString().includes(searchInput) ||
+      item.name.toLowerCase().includes(searchInput.toLowerCase())
+  );
 
   return (
     <div className="products">
       <div className="left">
         <div className="filterItem">
           <h2>Product Categories</h2>
-          {data_product.map((item) => (
+          {data_product.map((item, i) => (
             <div className="inputItem" key={item.id}>
               <input
                 type="checkbox"
                 id={item.id}
                 value={item.id}
-                onChange={handleChange}
+                onChange={setSearchInput}
               />
               <label htmlFor={item.id}>{item.category}</label>
             </div>
@@ -66,7 +82,7 @@ const Products = () => {
               id="asc"
               value="asc"
               name="price"
-              onChange={(e) => setSort("asc")}
+              onChange={(e) => setSort('asc')}
             />
             <label htmlFor="asc">Price (Lowest first)</label>
           </div>
@@ -76,20 +92,32 @@ const Products = () => {
               id="desc"
               value="desc"
               name="price"
-              onChange={(e) => setSort("desc")}
+              onChange={(e) => setSort('desc')}
             />
             <label htmlFor="desc">Price (Highest first)</label>
           </div>
         </div>
       </div>
       <div className="right">
-        <img
-          className="catImg"
-          src={campus_photo}
-          alt=""
-          height="200"
-        />
-        <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
+        <div className="filterItem">
+          <div className="searchBar">
+            <input
+              type="text"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+              placeholder="Search by ID or Name"
+            />
+            <button onClick={setSearchInput}>Search</button>
+          </div>
+        </div>
+        <img className="catImg" src={campus_photo} alt="" height="250" />
+        <h2 className="searchTitle">Search Results</h2>
+        {showResults && filteredProducts.length === 0 && (
+          <p className="noResults">No results found.</p>
+        )}
+        {data_product.map((item, i) => (
+          <div><ProductList key={item.id} /></div>
+        ))}
       </div>
     </div>
   );

@@ -6,9 +6,11 @@ import Messages from './Pages/Messages';
 import Listing from './Pages/Listing';
 import Cart from './Pages/Cart';
 import Product from './Pages/Product';
-import Signup from './Pages/Signup';
+import LoginSignup from './Pages/LoginSignup';
 import Footer from './Components/Footer/Footer';
 import Products from './Pages/Products';
+import Profile from './Pages/Profile';
+import Signup from './Pages/Signup'
 import Login from './Pages/Login'
 
 function App() {
@@ -27,6 +29,7 @@ function App() {
         <Route path='/signup' element={<Signup/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/products' element={<Products/>}/>
+        <Route path='/profile' element={<Profile/>}/>
       </Routes>
       <Footer />
       </BrowserRouter>

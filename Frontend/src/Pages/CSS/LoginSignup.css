@@ -16,7 +16,7 @@
 }
 .loginsignup-fields{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 29px;
     margin-top: 30px;
 }
