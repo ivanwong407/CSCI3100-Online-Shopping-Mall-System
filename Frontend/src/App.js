@@ -6,9 +6,10 @@ import Messages from './Pages/Messages';
 import Listing from './Pages/Listing';
 import Cart from './Pages/Cart';
 import Product from './Pages/Product';
-import LoginSignup from './Pages/LoginSignup';
+import Signup from './Pages/Signup';
 import Footer from './Components/Footer/Footer';
 import Products from './Pages/Products';
+import Login from './Pages/Login'
 
 function App() {
   return (

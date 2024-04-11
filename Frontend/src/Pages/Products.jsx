@@ -1,10 +1,11 @@
-import React from 'react'
+import React from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import List from "../Components/List/List";
 import useFetch from "../useFetch";
-import "./CSS/Products.css";
-import campus_photo from "../Components/Assets/campus.jpg"
+import '../Pages/CSS/Products.css';
+import campus_photo from '../Components/Assets/campus.jpg'
+import data_product from "../Components/Assets/all_product";
 
 const Products = () => {
   const catId = parseInt(useParams().id);
@@ -32,7 +33,7 @@ const Products = () => {
       <div className="left">
         <div className="filterItem">
           <h2>Product Categories</h2>
-          {data?.map((item) => (
+          {data_product.map((item) => (
             <div className="inputItem" key={item.id}>
               <input
                 type="checkbox"
@@ -40,7 +41,7 @@ const Products = () => {
                 value={item.id}
                 onChange={handleChange}
               />
-              <label htmlFor={item.id}>{item.attributes.title}</label>
+              <label htmlFor={item.id}>{item.category}</label>
             </div>
           ))}
         </div>
@@ -86,7 +87,7 @@ const Products = () => {
           className="catImg"
           src={campus_photo}
           alt=""
-          height="250"
+          height="200"
         />
         <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
       </div>
