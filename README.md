@@ -35,6 +35,11 @@ CU@ReShop is built using the MERN stack:
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+## installation
+git clone https://yourrepository.com/cureshop.git](https://github.com/ivanwong407/CSCI3100-Online-Shopping-Mall-System.git
+npm install
+npm start (in directory of backend and frontend)
+
 ### Prerequisites
 
 What things you need to install the software and how to install them:
@@ -44,6 +49,4 @@ node.js
 npm
 MongoDB
 
-## Installation
-npm install
-npm start
+
